@@ -12,7 +12,7 @@ public class MomentReadPermissionNotAllowedToReadRepositoryImpl implements Momen
 
     public MomentReadPermissionNotAllowedToReadRepositoryImpl() {
         this.friendsWhoAreNotAllowedToReadMyMoments = new Friends();
-        friendsWhoAreNotAllowedToReadMyMoments.add(new Friend("zhao", "li"));
+        friendsWhoAreNotAllowedToReadMyMoments.add(new Friend("zhao", "qian"));
     }
 
     @Override
