@@ -11,8 +11,6 @@ import kata.ooadp.wechatmomentsrbac.domain.Role;
 import kata.ooadp.wechatmomentsrbac.domain.User;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
 public class ShowMomentsRepositoryImpl implements ShowMomentsRepository {
 
@@ -36,33 +34,35 @@ public class ShowMomentsRepositoryImpl implements ShowMomentsRepository {
         this.allMoments = new Moments();
         allMoments.add(new Moment(new User("zhao"), "zhao-contents-1"));
         allMoments.add(new Moment(new User("qian"), "qian-contents-1"));
+        allMoments.add(new Moment(new User("sun"), "sun-contents-1"));
     }
 
     @Override
     public Moments findAllFilteredMoments(String userAccount) {
-        UsersInUserAccount userNotAllowedReadFriend = userNotAllowedReadFriend(userAccount);
+        UsersInUserAccount userNotAllowedReadFriend = userAllowedReadFriends(userAccount);
         return getUserMomentsTimeLine(userNotAllowedReadFriend);
     }
 
-    private Moments getUserMomentsTimeLine(UsersInUserAccount userNotAllowedReadFriend) {
+    private Moments getUserMomentsTimeLine(UsersInUserAccount userAllowedReadFriends) {
         Moments filteredMoments = new Moments();
         filteredMoments.addAll(this.allMoments.stream()
-                .filter(moment -> isMomentAllowedRead(userNotAllowedReadFriend, moment))
+                .filter(moment -> isMomentAllowedRead(userAllowedReadFriends, moment))
                 .toList());
         return filteredMoments;
     }
 
     private static boolean isMomentAllowedRead(UsersInUserAccount userNotAllowedReadFriend, Moment moment) {
-        return !userNotAllowedReadFriend.contains(moment.getUser().getUserAccount());
+        return userNotAllowedReadFriend.contains(moment.getUser().getUserAccount());
     }
 
-    private UsersInUserAccount userNotAllowedReadFriend(String userAccount) {
-        UsersInUserAccount userNotAllowedReadFriend = new UsersInUserAccount();
-        userNotAllowedReadFriend.addAll(this.momentReadPermissions.stream()
-                .filter(momentReadPermission -> momentReadPermission.getRole().getName().equals("not-allowed-to-read"))
+    private UsersInUserAccount userAllowedReadFriends(String userAccount) {
+        UsersInUserAccount userAllowedReadFriends = new UsersInUserAccount();
+        userAllowedReadFriends.addAll(this.momentReadPermissions.stream()
                 .filter(momentReadPermission -> momentReadPermission.getAddingFriend().getFriend().getUserAccount().equals(userAccount))
+                .filter(momentReadPermission -> !momentReadPermission.getRole().getName().equals("not-allowed-to-read"))
                 .map(momentReadPermission -> momentReadPermission.getAddingFriend().getMe().getUserAccount())
                 .toList());
-        return userNotAllowedReadFriend;
+        userAllowedReadFriends.add(userAccount);
+        return userAllowedReadFriends;
     }
 }
