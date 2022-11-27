@@ -20,11 +20,13 @@ class MomentReadPermissionNotAllowedToReadControllerTest {
 
 
     /**
-     * User     Friend
-     * ----     ------
-     * zhao     qian (not allowed to read)
-     *          sun
-     *          li
+     * AddingFriend
+     *
+     * me     friend
+     * --     ------
+     * zhao   qian (not allowed to read)
+     *        sun
+     *        li
      * @throws Exception
      */
     @Test

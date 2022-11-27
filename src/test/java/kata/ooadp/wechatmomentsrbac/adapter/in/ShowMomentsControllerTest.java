@@ -19,7 +19,20 @@ class ShowMomentsControllerTest {
     MockMvc client;
 
     /**
+     * AddingFriend
      *
+     * me     friend
+     * --     ------
+     * zhao   qian (not allowed to read)
+     *        sun
+     *        li
+     *
+     * Moment
+     *
+     * user     contents
+     * ----     --------
+     * zhao     zhao-contents-1
+     * qian     qian-contents-1
      * @throws Exception
      */
     @Test
