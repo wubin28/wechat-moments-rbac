@@ -51,8 +51,8 @@ public class ShowMomentsRepositoryImpl implements ShowMomentsRepository {
         return filteredMoments;
     }
 
-    private static boolean isMomentAllowedRead(UsersInUserAccount userNotAllowedReadFriend, Moment moment) {
-        return userNotAllowedReadFriend.contains(moment.getUser().getUserAccount());
+    private static boolean isMomentAllowedRead(UsersInUserAccount userAllowedReadFriends, Moment moment) {
+        return userAllowedReadFriends.contains(moment.getUser().getUserAccount());
     }
 
     private UsersInUserAccount userAllowedReadFriends(String userAccount) {
