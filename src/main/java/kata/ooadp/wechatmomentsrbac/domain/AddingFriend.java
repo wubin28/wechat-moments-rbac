@@ -1,12 +1,12 @@
 package kata.ooadp.wechatmomentsrbac.domain;
 
-public class Friend {
+public class AddingFriend {
     private User me;
     private User friend;
 
-    public Friend(String me, String friend) {
-        this.me = new User(me);
-        this.friend = new User(friend);
+    public AddingFriend(User me, User friend) {
+        this.me = me;
+        this.friend = friend;
     }
 
     public User getMe() {
