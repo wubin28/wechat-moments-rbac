@@ -25,6 +25,6 @@ class MomentReadPermissionNotAllowedToReadControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$", hasSize(1)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].me.userAccount").value("zhao"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].friend.userAccount").value("qian"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].friend.userAccount").value("li"));
     }
 }
