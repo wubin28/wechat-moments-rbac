@@ -17,11 +17,11 @@ public class MomentReadPermissionNotAllowedToReadRepositoryImpl implements Momen
 
     @Override
     public Friends findAllFriendsWhoAreNotAllowedToReadMyMoments(String userAccount) {
-        Friends result = new Friends();
+        Friends friendsWhoAreNotAllowedToReadMyMoments = new Friends();
         for (Friend friend : this.friendsWhoAreNotAllowedToReadMyMoments) {
-            result.add(new Friend(friend.getMe().getUserAccount(), friend.getFriend().getUserAccount()));
+            friendsWhoAreNotAllowedToReadMyMoments.add(new Friend(friend.getMe().getUserAccount(), friend.getFriend().getUserAccount()));
         }
-        return result;
+        return friendsWhoAreNotAllowedToReadMyMoments;
     }
 
 }

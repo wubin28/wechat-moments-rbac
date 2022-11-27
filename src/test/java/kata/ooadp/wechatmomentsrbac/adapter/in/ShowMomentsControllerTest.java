@@ -13,26 +13,21 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class MomentReadPermissionNotAllowedToReadControllerTest {
+class ShowMomentsControllerTest {
 
     @Autowired
     MockMvc client;
 
-
     /**
-     * User     Friend
-     * ----     ------
-     * zhao     qian (not allowed to read)
-     *          sun
-     *          li
+     *
      * @throws Exception
      */
     @Test
-    void should_find_All_Friends_Who_Are_Not_Allowed_To_Read_My_Moments() throws Exception {
-        client.perform(MockMvcRequestBuilders.get("/moment-read-permissions-not-allowed-to-read?userAccount=zhao"))
+    void should_find_All_Filtered_Moments() throws Exception {
+        client.perform(MockMvcRequestBuilders.get("/moments?userAccount=qian"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$", hasSize(1)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].me.userAccount").value("zhao"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].friend.userAccount").value("qian"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].user.userAccount").value("qian"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].contents").value("qian-contents-1"));
     }
 }
