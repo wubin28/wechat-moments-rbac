@@ -9,7 +9,7 @@ public class MomentReadPermission {
         this.role = role;
     }
 
-    public AddingFriend getFriend() {
+    public AddingFriend getAddingFriend() {
         return addingFriend;
     }
 

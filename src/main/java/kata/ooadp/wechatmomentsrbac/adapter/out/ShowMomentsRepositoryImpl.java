@@ -14,20 +14,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class ShowMomentsRepositoryImpl implements ShowMomentsRepository {
 
-    private UsersInUserAccount usersInUserAccountWhoConfiguredNotAllowedToRead;
     private MomentReadPermissions momentReadPermissions;
     private Moments allMoments;
 
     public ShowMomentsRepositoryImpl() {
         initializeAllMoments();
         initializeAllMomentReadPermissions();
-        initializeAllUsersWhoConfigredNotAllowedToRead();
-
-    }
-
-    private void initializeAllUsersWhoConfigredNotAllowedToRead() {
-        this.usersInUserAccountWhoConfiguredNotAllowedToRead = new UsersInUserAccount();
-        usersInUserAccountWhoConfiguredNotAllowedToRead.add("zhao");
     }
 
     private void initializeAllMomentReadPermissions() {
@@ -46,6 +38,14 @@ public class ShowMomentsRepositoryImpl implements ShowMomentsRepository {
 
     @Override
     public Moments findAllFilteredMoments(String userAccount) {
+        UsersInUserAccount usersInUserAccountWhoConfiguredNotAllowedToRead = new UsersInUserAccount();
+        for (MomentReadPermission momentReadPermission : this.momentReadPermissions){
+            if (momentReadPermission.getRole().getName().equals("not-allowed-to-read")) {
+                if (momentReadPermission.getAddingFriend().getFriend().getUserAccount().equals(userAccount)) {
+                    usersInUserAccountWhoConfiguredNotAllowedToRead.add(momentReadPermission.getAddingFriend().getMe().getUserAccount());
+                }
+            }
+        }
         Moments filteredMoments = new Moments();
         for (Moment moment : this.allMoments) {
             if (!usersInUserAccountWhoConfiguredNotAllowedToRead.contains(moment.getUser().getUserAccount())) {
