@@ -18,6 +18,12 @@ public class ShowMomentsRepositoryImpl implements ShowMomentsRepository {
         this.fakeMomentDB = fakeMomentDB;
     }
 
+    private void initializeAllMoments() {
+        this.allMoments = new Moments();
+        allMoments.add(new Moment(new User("zhao"), "zhao-contents-1"));
+        allMoments.add(new Moment(new User("qian"), "qian-contents-1"));
+        allMoments.add(new Moment(new User("sun"), "sun-contents-1"));
+    }
 
     @Override
     public Moments findAllFilteredMoments(String userAccount) {
