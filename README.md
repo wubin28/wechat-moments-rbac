@@ -78,7 +78,7 @@ Eric Evans的《领域驱动设计》一书，主要讨论的是如何做好OOD(
 - 分析类图中类之间的关系不是一蹴而就的，会随着后面对业务理解的深入而不断调整，比如图中`AddingFriend`类，原来叫`Friend`类，但后来感觉还是叫`AddingFriend`更能反映微信加好友的业务，所以更名。`MomentReadPermission`类原来是指向`User`类的，但后来发现朋友圈更新阅读权限其实是与所添加的好友相关的，所以改为指向`AddingFriend`类。上图中的`Friend`类名故意没有更改，出现了与下面设计类图`AddingFriend`类不一致的情况，就是要提醒大家注意这一点。但在实际工作中，还是需要改过来，保持一致
 - `Role`类表示角色，在本操练中，这个类有两个实例，即"不让Ta看"和"不看Ta"是两个不同的角色
 - 一对好友关系可以有多个角色（即可以同时配置"不让Ta看"和"不看Ta"），而一个角色（如"不让Ta看"）可以对应多对好友关系，即不让多个好友看自己的朋友圈，所以这种"多对多"的关系，可以拆分为两个"一对多"的关系，如图所示，引入了`MomentReadPermission`类来实现两个"一对多"
-- 微信朋友圈权限管理是一个简化版的RBAC96框架的RBAC0模型的实现。有兴趣的同学可以参考：Sandhu教授1996年提出的RBAC96框架中的RBAC0概念模型。教授的rbac96框架介绍：https://www.profsandhu.com/infs767/infs767fall03/lecture01-2.pdf; RBAC入门教程及实例演示：https://blog.csdn.net/weixin_44911308/article/details/108615759; 教授当年提出rbac96的论文：https://csrc.nist.gov/CSRC/media/Projects/Role-Based-Access-Control/documents/sandhu96.pdf
+- 微信朋友圈权限管理是一个简化版的RBAC96框架的RBAC0模型的实现。根据RBAC0模型，应该有`Permission`类与`Role`类发生“多对多”的关系。但本题`Role`（只有"不让Ta看"和"不看Ta"这两个角色）和`Permission`（只有看朋友圈更新这一个权限）是一对一的关系，所以将`Permission`类并入`Role`类。有兴趣的同学可以参考：Sandhu教授1996年提出的RBAC96框架中的RBAC0概念模型。教授的rbac96框架介绍：https://www.profsandhu.com/infs767/infs767fall03/lecture01-2.pdf; RBAC入门教程及实例演示：https://blog.csdn.net/weixin_44911308/article/details/108615759; 教授当年提出rbac96的论文：https://csrc.nist.gov/CSRC/media/Projects/Role-Based-Access-Control/documents/sandhu96.pdf
 
 ## 6. 设计类图丰富设计类的属性和方法以指导编程
 
