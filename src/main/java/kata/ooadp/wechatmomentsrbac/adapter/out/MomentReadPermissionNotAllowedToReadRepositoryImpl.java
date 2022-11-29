@@ -4,12 +4,8 @@ import kata.ooadp.wechatmomentsrbac.adapter.in.pojo.Friends;
 import kata.ooadp.wechatmomentsrbac.adapter.out.db.FakeFriendsDB;
 import kata.ooadp.wechatmomentsrbac.application.port.out.MomentReadPermissionNotAllowedToReadRepository;
 import kata.ooadp.wechatmomentsrbac.domain.AddingFriend;
-import kata.ooadp.wechatmomentsrbac.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 @Repository
 public class MomentReadPermissionNotAllowedToReadRepositoryImpl implements MomentReadPermissionNotAllowedToReadRepository {

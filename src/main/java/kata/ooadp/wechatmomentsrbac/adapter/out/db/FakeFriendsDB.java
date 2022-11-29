@@ -1,8 +1,6 @@
 package kata.ooadp.wechatmomentsrbac.adapter.out.db;
 
 import kata.ooadp.wechatmomentsrbac.adapter.in.pojo.Friends;
-import kata.ooadp.wechatmomentsrbac.domain.AddingFriend;
-import kata.ooadp.wechatmomentsrbac.domain.User;
 import org.springframework.stereotype.Component;
 
 @Component
