@@ -4,7 +4,7 @@ import kata.ooadp.wechatmomentsrbac.adapter.in.pojo.Moments;
 import kata.ooadp.wechatmomentsrbac.adapter.out.pojo.MomentReadPermissions;
 import org.springframework.stereotype.Component;
 
-@Component()
+@Component
 public class FakeMomentDB {
     private MomentReadPermissions momentReadPermissions;
     private Moments allMoments;
