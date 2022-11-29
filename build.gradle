@@ -6,7 +6,8 @@ plugins {
 
 group = 'kata.ooadp.wechatmomentsrbac'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '1.8'
+sourceCompatibility = '16'
+targetCompatibility = '16'
 
 repositories {
 	mavenCentral()
