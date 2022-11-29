@@ -1,7 +1,7 @@
 package kata.ooadp.wechatmomentsrbac.adapter.in;
 
 import kata.ooadp.wechatmomentsrbac.adapter.in.pojo.Friends;
-import kata.ooadp.wechatmomentsrbac.adapter.out.stubdb.FakeFriendsDB;
+import kata.ooadp.wechatmomentsrbac.adapter.out.stubdb.MomentReadPermissionNotAllowedToServiceStubDb;
 import kata.ooadp.wechatmomentsrbac.domain.AddingFriend;
 import kata.ooadp.wechatmomentsrbac.domain.User;
 import org.junit.jupiter.api.Test;
@@ -23,7 +23,7 @@ class MomentReadPermissionNotAllowedToReadControllerTest {
     @Autowired
     MockMvc client;
     @MockBean
-    FakeFriendsDB fakeFriendsDB;
+    MomentReadPermissionNotAllowedToServiceStubDb momentReadPermissionNotAllowedToServiceStubDb;
 
 
     /**
@@ -42,7 +42,7 @@ class MomentReadPermissionNotAllowedToReadControllerTest {
 
         Friends friendsWhoAreNotAllowedToReadMyMoments = new Friends();
         friendsWhoAreNotAllowedToReadMyMoments.add(new AddingFriend(new User("zhao"), new User("qian")));
-        when(fakeFriendsDB.getFriendsWhoAreNotAllowedToReadMyMoments()).thenReturn(friendsWhoAreNotAllowedToReadMyMoments);
+        when(momentReadPermissionNotAllowedToServiceStubDb.getFriendsWhoAreNotAllowedToReadMyMoments()).thenReturn(friendsWhoAreNotAllowedToReadMyMoments);
         client.perform(MockMvcRequestBuilders.get("/moment-read-permissions-not-allowed-to-read?userAccount=zhao"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$", hasSize(1)))
