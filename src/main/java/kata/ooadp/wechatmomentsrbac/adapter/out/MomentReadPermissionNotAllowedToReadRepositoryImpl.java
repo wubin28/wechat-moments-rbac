@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class MomentReadPermissionNotAllowedToReadRepositoryImpl implements MomentReadPermissionNotAllowedToReadRepository {
 
@@ -22,9 +24,10 @@ public class MomentReadPermissionNotAllowedToReadRepositoryImpl implements Momen
     @Override
     public Friends findAllFriendsWhoAreNotAllowedToReadMyMoments(String userAccount) {
         Friends friendsWhoAreNotAllowedToReadMyMoments = new Friends();
-        for (AddingFriend addingFriend : this.fakeFriendsDB.getFriendsWhoAreNotAllowedToReadMyMoments()) {
-            friendsWhoAreNotAllowedToReadMyMoments.add(new AddingFriend(addingFriend.getMe(), addingFriend.getFriend()));
-        }
+        friendsWhoAreNotAllowedToReadMyMoments.addAll(this.fakeFriendsDB.
+                getFriendsWhoAreNotAllowedToReadMyMoments().stream()
+                .map(addingFriend -> new AddingFriend(addingFriend.getMe(), addingFriend.getFriend()))
+                .toList());
         return friendsWhoAreNotAllowedToReadMyMoments;
     }
 

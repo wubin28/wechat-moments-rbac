@@ -10,8 +10,7 @@ public class FakeFriendsDB {
     private Friends friendsWhoAreNotAllowedToReadMyMoments;
 
     public FakeFriendsDB() {
-        this.friendsWhoAreNotAllowedToReadMyMoments = new Friends();
-        friendsWhoAreNotAllowedToReadMyMoments.add(new AddingFriend(new User("zhao"), new User("qian")));
+
     }
 
     public Friends getFriendsWhoAreNotAllowedToReadMyMoments() {
