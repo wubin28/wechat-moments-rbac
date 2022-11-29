@@ -40,7 +40,7 @@ class ShowMomentsControllerTest {
         client.perform(MockMvcRequestBuilders.get("/moments?userAccount=qian"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$", hasSize(1)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].user.userAccount").value("qiwan"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].user.userAccount").value("qian"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].contents").value("qian-contents-1"));
     }
 }
