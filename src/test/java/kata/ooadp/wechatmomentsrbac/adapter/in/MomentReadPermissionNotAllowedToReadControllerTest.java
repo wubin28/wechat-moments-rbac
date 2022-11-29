@@ -1,7 +1,7 @@
 package kata.ooadp.wechatmomentsrbac.adapter.in;
 
 import kata.ooadp.wechatmomentsrbac.adapter.in.pojo.Friends;
-import kata.ooadp.wechatmomentsrbac.adapter.out.db.FakeFriendsDB;
+import kata.ooadp.wechatmomentsrbac.adapter.out.stubdb.FakeFriendsDB;
 import kata.ooadp.wechatmomentsrbac.domain.AddingFriend;
 import kata.ooadp.wechatmomentsrbac.domain.User;
 import org.junit.jupiter.api.Test;

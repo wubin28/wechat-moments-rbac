@@ -1,4 +1,4 @@
-package kata.ooadp.wechatmomentsrbac.adapter.out.db;
+package kata.ooadp.wechatmomentsrbac.adapter.out.stubdb;
 
 import kata.ooadp.wechatmomentsrbac.adapter.in.pojo.Friends;
 import org.springframework.stereotype.Component;

@@ -1,7 +1,7 @@
 package kata.ooadp.wechatmomentsrbac.adapter.in;
 
 import kata.ooadp.wechatmomentsrbac.adapter.in.pojo.Moments;
-import kata.ooadp.wechatmomentsrbac.adapter.out.db.FakeMomentDB;
+import kata.ooadp.wechatmomentsrbac.adapter.out.stubdb.ShowMomentsServiceStubDb;
 import kata.ooadp.wechatmomentsrbac.adapter.out.pojo.MomentReadPermissions;
 import kata.ooadp.wechatmomentsrbac.domain.AddingFriend;
 import kata.ooadp.wechatmomentsrbac.domain.Moment;
@@ -27,7 +27,7 @@ class ShowMomentsControllerTest {
     @Autowired
     MockMvc client;
     @MockBean
-    FakeMomentDB fakeMomentDB;
+    ShowMomentsServiceStubDb showMomentsServiceStubDb;
 
     /**
      * AddingFriend
@@ -53,13 +53,13 @@ class ShowMomentsControllerTest {
         allMoments.add(new Moment(new User("zhao"), "zhao-contents-1"));
         allMoments.add(new Moment(new User("qian"), "qian-contents-1"));
         allMoments.add(new Moment(new User("sun"), "sun-contents-1"));
-        when(fakeMomentDB.getAllMoments()).thenReturn(allMoments);
+        when(showMomentsServiceStubDb.getAllMoments()).thenReturn(allMoments);
         MomentReadPermissions momentReadPermissions = new MomentReadPermissions();
         momentReadPermissions.add(new MomentReadPermission(
                 new AddingFriend(new User("zhao"), new User("qian")),
                 new Role("not-allowed-to-read")
         ));
-        when(fakeMomentDB.getMomentReadPermissions()).thenReturn(momentReadPermissions);
+        when(showMomentsServiceStubDb.getMomentReadPermissions()).thenReturn(momentReadPermissions);
 
         client.perform(MockMvcRequestBuilders.get("/moments?userAccount=qian"))
                 .andExpect(MockMvcResultMatchers.status().isOk())

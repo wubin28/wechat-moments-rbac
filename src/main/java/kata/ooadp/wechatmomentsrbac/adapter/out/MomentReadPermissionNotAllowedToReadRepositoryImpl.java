@@ -1,7 +1,7 @@
 package kata.ooadp.wechatmomentsrbac.adapter.out;
 
 import kata.ooadp.wechatmomentsrbac.adapter.in.pojo.Friends;
-import kata.ooadp.wechatmomentsrbac.adapter.out.db.FakeFriendsDB;
+import kata.ooadp.wechatmomentsrbac.adapter.out.stubdb.FakeFriendsDB;
 import kata.ooadp.wechatmomentsrbac.application.port.out.MomentReadPermissionNotAllowedToReadRepository;
 import kata.ooadp.wechatmomentsrbac.domain.AddingFriend;
 import org.springframework.beans.factory.annotation.Autowired;

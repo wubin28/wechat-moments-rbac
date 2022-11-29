@@ -1,7 +1,7 @@
 package kata.ooadp.wechatmomentsrbac.adapter.out;
 
 import kata.ooadp.wechatmomentsrbac.adapter.in.pojo.Moments;
-import kata.ooadp.wechatmomentsrbac.adapter.out.db.FakeMomentDB;
+import kata.ooadp.wechatmomentsrbac.adapter.out.stubdb.ShowMomentsServiceStubDb;
 import kata.ooadp.wechatmomentsrbac.adapter.out.pojo.UsersInUserAccount;
 import kata.ooadp.wechatmomentsrbac.application.port.out.ShowMomentsRepository;
 import kata.ooadp.wechatmomentsrbac.domain.Moment;
@@ -11,11 +11,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class ShowMomentsRepositoryImpl implements ShowMomentsRepository {
 
-    private final FakeMomentDB fakeMomentDB;
+    private final ShowMomentsServiceStubDb showMomentsServiceStubDb;
 
     @Autowired
-    public ShowMomentsRepositoryImpl(FakeMomentDB fakeMomentDB) {
-        this.fakeMomentDB = fakeMomentDB;
+    public ShowMomentsRepositoryImpl(ShowMomentsServiceStubDb showMomentsServiceStubDb) {
+        this.showMomentsServiceStubDb = showMomentsServiceStubDb;
     }
 
     @Override
@@ -26,7 +26,7 @@ public class ShowMomentsRepositoryImpl implements ShowMomentsRepository {
 
     private Moments getUserMomentsTimeLine(UsersInUserAccount userAllowedReadFriends) {
         Moments filteredMoments = new Moments();
-        filteredMoments.addAll(fakeMomentDB.getAllMoments().stream()
+        filteredMoments.addAll(showMomentsServiceStubDb.getAllMoments().stream()
                 .filter(moment -> isMomentAllowedRead(userAllowedReadFriends, moment))
                 .toList());
         return filteredMoments;
@@ -38,7 +38,7 @@ public class ShowMomentsRepositoryImpl implements ShowMomentsRepository {
 
     private UsersInUserAccount userAllowedReadFriends(String userAccount) {
         UsersInUserAccount userAllowedReadFriends = new UsersInUserAccount();
-        userAllowedReadFriends.addAll(fakeMomentDB.getMomentReadPermissions().stream()
+        userAllowedReadFriends.addAll(showMomentsServiceStubDb.getMomentReadPermissions().stream()
                 .filter(momentReadPermission -> momentReadPermission.getAddingFriend().getFriend().getUserAccount().equals(userAccount))
                 .filter(momentReadPermission -> !momentReadPermission.getRole().getName().equals("not-allowed-to-read"))
                 .map(momentReadPermission -> momentReadPermission.getAddingFriend().getMe().getUserAccount())
