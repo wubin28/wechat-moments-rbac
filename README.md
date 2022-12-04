@@ -130,3 +130,5 @@ Craig Larman所著《UML和模式应用》（第三版）第一章中说："面�
 
 代码和针对`Controller`的自动化测试参见：https://github.com/wubin28/wechat-moments-rbac
 
+---
+微信订阅号：OOADP-n-DDD-Katas
